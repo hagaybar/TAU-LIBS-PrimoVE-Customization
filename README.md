@@ -29,7 +29,7 @@ Authorized library staff can use this repository to:
 
 ## Contact
 
-For questions regarding this repository, please contact the [Hagay Bar](mailto:hagaybar@tauex.tau.ac.il).
+For questions regarding this repository, please contact [Hagay Bar](mailto:hagaybar@tauex.tau.ac.il).
 
 ---
 
