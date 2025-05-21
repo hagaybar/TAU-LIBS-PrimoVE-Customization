@@ -1,3 +1,6 @@
+
+![Tel Aviv University Libraries Logo](tau-logo.png)
+
 # Tel Aviv University Libraries - Primo VE Customizations
 
 This repository contains customization code for Ex Libris Primo VE implementation at Tel Aviv University Libraries.
