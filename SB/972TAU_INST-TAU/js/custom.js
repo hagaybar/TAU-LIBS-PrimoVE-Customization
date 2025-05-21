@@ -413,8 +413,6 @@ currentPage = window.location.href;
 
 // Research Assistant component begin
 
-
-
 app.controller('prmResearchAssistantAfterController', ['$translate', function($translate) {
     var vm = this;
     
