@@ -1,0 +1,412 @@
+
+/* 1.1.25 Research Assistance text : begin */
+.primo-ra-first-part {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.primo-ra-second-part {
+    display: block;
+    color: #666666;
+	font-weight: bold;
+}
+
+/* 1.1.25 Research Assistance text : end */
+
+
+/* 9.10.2024 restyle arrows of digital files navigator in "Quick Access"*/
+#prev, #next {
+    /* color: purple; */
+    transform: scale(2); /* Doubles the size of the arrow */
+    display: inline-block; /* Ensures the transform works on inline elements */
+}
+
+
+/* 25.12.2023 change background color of the filter icon */
+button.md-icon-button.md-mini.md-button.md-primoExplore-theme.md-ink-ripple {
+background-color: #F7EDA3!important;
+}
+
+button.md-icon-button.md-mini.md-button.md-primoExplore-theme.md-ink-ripple:hover {
+    color: #F7EDA3!important; /* Replace with your desired text color */
+    background-color:#3a3a3a!important; /* Replace with your desired background color */
+}
+
+button.md-icon-button.md-mini.md-button.md-primoExplore-theme.md-ink-ripple:active {
+    color: #F7EDA3!important; /* Replace with your desired text color */
+    background-color:#3a3a3a!important; /* Replace with your desired background color */
+}
+
+button.md-icon-button.md-mini.md-button.md-primoExplore-theme.md-ink-ripple:focus-within {
+    color: #F7EDA3!important; /* Replace with your desired text color */
+    background-color:#3a3a3a!important; /* Replace with your desired background color */
+}
+
+/* 25.12.2023 change background color of the expand results icon */
+
+div.layout-align-end-center.layout-row > button.md-icon-button.header-action.expand-collapse-button.md-button.md-primoExplore-theme.md-ink-ripple {
+background-color: #F7EDA3!important;
+}
+
+div.layout-align-end-center.layout-row > button.md-icon-button.header-action.expand-collapse-button.md-button.md-primoExplore-theme.md-ink-ripple:hover {
+    color: #F7EDA3!important; /* Replace with your desired text color */
+    background-color:#3a3a3a!important; /* Replace with your desired background color */
+}
+
+div.layout-align-end-center.layout-row > button.md-icon-button.header-action.expand-collapse-button.md-button.md-primoExplore-theme.md-ink-ripple:active {
+    color: #F7EDA3!important; /* Replace with your desired text color */
+    background-color:#3a3a3a!important; /* Replace with your desired background color */
+}
+
+div.layout-align-end-center.layout-row > button.md-icon-button.header-action.expand-collapse-button.md-button.md-primoExplore-theme.md-ink-ripple:focus-within {
+    color: #F7EDA3!important; /* Replace with your desired text color */
+    background-color:#3a3a3a!important; /* Replace with your desired background color */
+}
+
+
+/* external-search-facet css begin */
+/* 06.11.2023 
+- Handle directionality for the external-search-facet 
+- Using custom ID: external-search-facet (see custom html file: externalSearch.html)
+	*/
+
+
+#external-search-facet .md-chip-content {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+}
+
+/* Make sure the the text line aligns with the icon */
+#external-search-facet .md-chips .md-chip .md-chip-content {
+    line-height: normal; 
+}
+
+#external-search-facet .md-chip-content img {
+    margin-right: 5px; /* Spacing between icon and text */
+}
+
+.rtl-layout img {
+    margin-left: 5px; /* Spacing between text and image */
+}
+
+/* external-search-facet css end */
+
+
+/* 08.08.2023 color change and bold for library name */
+prm-location-items .tab-content-header .md-title  {
+	color: #44707b;
+	font-weight: bold;
+}
+md-list-item.md-2-line .md-list-item-text h3, md-list-item.md-2-line>.md-no-style .md-list-item-text h3, md-list-item.md-3-line .md-list-item-text h3, md-list-item.md-3-line>.md-no-style .md-list-item-text h3 {
+	color: #44707b;
+	font-weight: bold;
+}
+
+/*  06.02.23 - fix call no. directionality */
+
+prm-opac prm-location-items p.ng-binding:nth-child(2) span:nth-child(5) {
+	direction: initial;
+	font-weight: bold;
+}
+
+
+prm-opac prm-location-items div.weak-text div:first-child span:nth-child(2) {
+  direction: initial;
+  display: inline-block;
+  font-weight: bold;
+}
+
+
+prm-opac prm-locations span:nth-child(5) {
+	direction: initial;
+	font-weight: bold;
+}
+
+
+/* REL AUG 2021: apply separate formatting to messages and blocks in My Library Card: block and message */
+.block {
+    background-color: #ffb3b3;
+  }
+  
+.message {
+    background-color: #e6ff99;
+  }
+
+/* REL AUG 2021: Block and Messages tab in My Library Card */
+prm-messages-and-blocks .block{
+   background-color: #ffb3b3;
+  }
+
+prm-messages-and-blocks .message{
+   background-color: #e6ff99;
+  }
+
+/* brwozine fix for libkey in rtl start */
+[dir="rtl"] .browzine {
+                margin-right: 0 !important;
+                margin-left: 4.5em;
+}
+
+.browzine a {
+                color: #0f7d00;
+                font-weight: 500;
+}
+
+.browzine md-icon {
+                display: none;
+}
+
+/* brwozine fix for libkey in rtl end */
+
+/*Clickable Logo */
+prm-logo .logo-image, prm-logo img {
+    max-height: 50px;
+}
+
+prm-logo div.product-logo {
+  display:none;
+}
+
+prm-logo div.product-logo-local {
+  display: flex;
+}
+
+/* The upper menu background color  */
+prm-topbar .top-nav-bar {
+background-color: #244f02;
+/*
+PROD: "background-color: #1a406c;" 
+SB: "background-color: #1a406c;" 
+*/
+}
+/* The uper menu background fonts */
+prm-main-menu[menu-type=menu] .md-button {
+    padding: 0 .75em;
+    max-width: 12em;
+    font-size: 0.95em;
+    font-family: 'Open Sans Hebrew',sans-serif;
+    color: #ffffff;
+    font-weight: 300!important;
+}
+
+/* 'display more items' in item list, change to a more visible orange */
+prm-location-items button.button-link.link-alt-color.zero-margin.md-button.md-primoExplore-theme.md-ink-ripple span.bold-text.padding-small {
+  color: #e08303
+}
+
+
+/* The Library Logo */
+
+prm-logo .product-logo {
+    height: 100%;
+    padding: .2em;
+    padding-right: 0.85em;
+	padding-left: 0.85em;
+}
+
+/* Authorization Button */
+prm-user-area .user-menu-button .user-name {
+    text-transform: none;
+    font-weight: 600;
+    color: #56afdb;
+    text-align: left;
+    max-width: 150px;
+}
+
+/* Language and Favorites button color */
+prm-topbar .md-button, prm-user-area .md-button.user-menu-button {
+color: #ffffff;
+}
+
+/* Favorites icon color */
+.md-button.button-over-dark, prm-topbar .md-button {
+color: #ffffff;
+}
+
+/* Advanced search button */
+prm-journals-search-bar .search-switch-buttons .md-button.switch-to-advanced, prm-search-bar .search-switch-buttons .md-button.switch-to-advanced {
+    color: #fff;
+}
+
+/* Search bar background color */
+.prm-primary-bg, prm-journals-search-bar, prm-search-bar, prm-spinner.overlay-cover.light-on-dark:after {
+background-color: #47761e;
+
+/* 
+SB:   "background-color: #47761e;" 
+PROD: "background-color: #1e4776;" 
+*/
+
+}
+
+ 
+
+/* Search bar padding */
+prm-search-bar {
+	padding-block : 2em;
+}
+
+/* Boxes background color */
+md-card.default-card {background-color: #ffffff;box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);border-radius: 25px;}
+
+
+/* Fix Hebrew directionality in creator\contributer line in brief result */
+[dir=rtl] prm-brief-result .item-detail {
+	direction:unset;
+}
+
+/* Hide RefWorks from user menu */
+.my-refworks-ctm, .my-refworks-ctm + md-menu-divider {
+     display: none;
+}
+
+/* Hide the Edit button in the personal details section */
+
+#personal_settings-focus {
+     display: none;
+}
+
+/* Hide sections from personal details section */
+
+md-divder.card-divider:nth-child(2), md-divder.card-divider:nth-child(4), div.card-content-section:nth-child(3), div.card-content-section:nth-child(5) {
+     display: none;
+}
+
+
+/* Hide Renew All from the main library card page */
+.tiles-grid > prm-loans-overview:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(2) {
+  display:none;
+}
+
+
+/* Hide the Renewal buttons from the loan page in library card */
+/* Top button for all */
+prm-loans.flex > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > button:nth-child(1) {
+  display:none;
+}
+
+/* Hide the Yellow Alert Bar in location Getit when there are no items for holding : "At this location there are no items details" */
+
+prm-locations div.padding-left-medium div.bar.alert-bar.layout-align-start-center.layout-row {
+  display:none;
+}
+
+/* Width of Item Loan Details field */
+#tab-content-126 > div > md-content > prm-location-items > md-list > md-list-item:nth-child(1) > div.in-element-dialog-context.layout-row.flex > div.md-list-item-text.layout-wrap.layout-row.flex > div.layout-column.flex-xs-100.flex-80
+#tab-content-7 > div > md-content > prm-location-items > md-list > md-list-item:nth-child(1) > div.in-element-dialog-context.layout-row.flex > div.md-list-item-text.layout-wrap.layout-row.flex > div.layout-column.flex-xs-100.flex-80
+
+.flex-80, .layout-row>.flex-80 {
+    -ms-flex: 1 1 80%;
+    flex: 1 1 80%;
+    max-width: 80%;
+    max-height: 100%;
+    box-sizing: border-box;
+}
+
+#tab-content-126 > div > md-content > prm-location-items > md-list > md-list-item:nth-child(2) > div.in-element-dialog-context.layout-row.flex > div.md-list-item-text.layout-wrap.layout-row.flex > div:nth-child(1)
+
+/* Location green color and font-weight: bold */
+
+span.best-location-delivery.locations-link  {
+    color: green !important;
+    font-weight: bold;
+}
+
+.best-location-delivery.locations-link{
+    color: green !important;
+    font-weight: bold;
+}
+
+span.best-location-sub-location.locations-link {
+
+	font-weight: bold;
+}
+
+/* Hide 'Show License' Button in Viewit */
+
+prm-alma-viewit prm-alma-viewit-items md-list-item div._md-secondary-container button.button-link.md-button.md-primoExplore-theme.md-ink-ripple {
+    display:none;
+}
+
+
+
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  font-style: italic;
+  font-weight: 300;
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-LightItalic.eot);
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-LightItalic.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-LightItalic.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-LightItalic.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-LightItalic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  font-style: normal;
+  font-weight: 300;
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Light.eot);
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Light.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Light.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Light.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Light.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  font-style: italic;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Italic.eot);
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Italic.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Italic.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Italic.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Italic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Regular.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Regular.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  font-style: italic;
+  font-weight: 700;
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-BoldItalic.eot);
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-BoldItalic.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-BoldItalic.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-BoldItalic.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-BoldItalic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  font-style: normal;
+  font-weight: 700;
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Bold.eot);
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Bold.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Bold.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Bold.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-Bold.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  font-style: italic;
+  font-weight: 800;
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBoldItalic.eot);
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBoldItalic.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBoldItalic.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBoldItalic.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBoldItalic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans Hebrew';
+  font-style: normal;
+  font-weight: 800;
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBold.eot);
+  src: url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBold.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBold.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBold.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/opensanshebrew/v3/OpenSansHebrew-ExtraBold.ttf) format('truetype');
+}

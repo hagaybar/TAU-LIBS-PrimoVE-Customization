@@ -1,0 +1,18 @@
+<div id="external-search-facet" ng-if="name === 'Search also in' || name === 'לחפש במנועי חיפוש נוספים'">
+    <div ng-hide="$ctrl.parentCtrl.facetGroup.facetGroupCollapsed">
+        <div class="section-content animate-max-height-variable">
+            <div class="md-chips md-chips-wrap">
+                <div ng-repeat="target in targets" aria-live="polite" class="md-chip animate-opacity-and-scale facet-element-marker-local4">
+					<div class="md-chip-content layout-row" role="button" tabindex="0" ng-class="{'rtl-layout': name === 'לחפש במנועי חיפוש נוספים'}">
+						<img ng-src="{{ target.img }}" width="16" height="16" alt="{{ name === 'Search also in' ? target.alt : target.nameHe }}" style="vertical-align:middle;">
+						<strong dir="auto" title="{{ name === 'Search also in' ? target.name : target.nameHe }}">
+							<a ng-href="{{ target.url + target.mapping(queries, filters) }}" target="_blank" class="{{ target.mapping(queries, filters) }}">
+								{{ name === 'Search also in' ? target.name : target.nameHe }}
+							</a>
+						</strong>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
