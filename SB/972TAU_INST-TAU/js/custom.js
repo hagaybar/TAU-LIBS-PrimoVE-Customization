@@ -411,6 +411,121 @@ currentPage = window.location.href;
 
 // Add Clickable Logo & Change logo by Language end
 
+// Fix Hebrew quotation marks in titles - split across nested directional spans
+function fixHebrewQuotationMarks() {
+    console.log('Running Hebrew quotation marks fix...');
+    
+    // Find all spans with ng-bind-html containing highlightedText and dir="auto"
+    const targetSpans = document.querySelectorAll('span[ng-bind-html*="highlightedText"][dir="auto"]');
+    
+    let fixedCount = 0;
+    
+    targetSpans.forEach(span => {
+        // Look for the problematic pattern:
+        // span[dir="ltr"] containing quote + Hebrew text + &nbsp;
+        // followed by span[dir="rtl"] containing more Hebrew text with closing quote
+        
+        const ltrSpan = span.querySelector('span[dir="ltr"]');
+        const rtlSpan = span.querySelector('span[dir="rtl"]');
+        
+        if (ltrSpan && rtlSpan) {
+            const ltrText = ltrSpan.textContent || ltrSpan.innerText || '';
+            const rtlText = rtlSpan.textContent || rtlSpan.innerText || '';
+            
+            // Check if this matches our problematic pattern
+            if (isHebrewQuotePattern(ltrText, rtlText)) {
+                console.log('Found problematic Hebrew quote pattern:', { ltrText, rtlText });
+                fixSpanStructure(span, ltrText, rtlText);
+                fixedCount++;
+            }
+        }
+    });
+    
+    if (fixedCount > 0) {
+        console.log(`Fixed ${fixedCount} Hebrew quotation mark issues`);
+    }
+}
+
+function isHebrewQuotePattern(ltrText, rtlText) {
+    // Check if ltrText starts with quote and contains Hebrew
+    const startsWithQuote = ltrText.trim().startsWith('"') || ltrText.trim().startsWith('״');
+    const ltrHasHebrew = /[\u0590-\u05FF]/.test(ltrText);
+    const rtlHasHebrew = /[\u0590-\u05FF]/.test(rtlText);
+    const rtlEndsWithQuote = rtlText.trim().endsWith('"') || rtlText.trim().endsWith('״');
+    
+    return startsWithQuote && ltrHasHebrew && rtlHasHebrew && rtlEndsWithQuote;
+}
+
+function fixSpanStructure(parentSpan, ltrText, rtlText) {
+    try {
+        // Combine the text and clean up
+        const combinedText = (ltrText + rtlText)
+            .replace(/&nbsp;/g, ' ')  // Replace &nbsp; with regular space
+            .replace(/\s+/g, ' ')     // Normalize multiple spaces
+            .trim();
+        
+        // Create new RTL span with the combined text
+        const newRtlSpan = document.createElement('span');
+        newRtlSpan.setAttribute('dir', 'rtl');
+        newRtlSpan.textContent = combinedText;
+        
+        // Replace the content of the parent span
+        parentSpan.innerHTML = '';
+        parentSpan.appendChild(newRtlSpan);
+        
+        console.log('Successfully fixed Hebrew quote structure:', combinedText);
+    } catch (error) {
+        console.error('Error fixing Hebrew quote structure:', error);
+    }
+}
+
+// Initialize the Hebrew quotation marks fix
+function initHebrewQuoteFix() {
+    // Run immediately if DOM is already loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fixHebrewQuotationMarks);
+    } else {
+        fixHebrewQuotationMarks();
+    }
+}
+
+// Start the Hebrew quote fix
+initHebrewQuoteFix();
+
+// Create observer for Hebrew quote fix to handle dynamic content
+const hebrewQuoteObserver = new MutationObserver((mutations) => {
+    let shouldFix = false;
+    
+    mutations.forEach((mutation) => {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            // Check if any added nodes contain our target spans
+            mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.querySelector && 
+                        (node.querySelector('span[ng-bind-html*="highlightedText"]') || 
+                         node.matches('span[ng-bind-html*="highlightedText"]'))) {
+                        shouldFix = true;
+                    }
+                }
+            });
+        }
+    });
+    
+    if (shouldFix) {
+        // Delay slightly to allow Angular to finish rendering
+        setTimeout(fixHebrewQuotationMarks, 200);
+    }
+});
+
+// Start observing for Hebrew quote fixes
+hebrewQuoteObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+});
+
+console.log('Hebrew quotation marks fix initialized');
+// Hebrew quotation marks fix end
+
 // Research Assistant component begin
 
 app.controller('prmResearchAssistantAfterController', ['$translate', function($translate) {
