@@ -411,120 +411,156 @@ currentPage = window.location.href;
 
 // Add Clickable Logo & Change logo by Language end
 
-// Fix Hebrew quotation marks in titles - split across nested directional spans
-function fixHebrewQuotationMarks() {
-    console.log('Running Hebrew quotation marks fix...');
+// DEBUG VERSION - Fix Hebrew quotation marks in titles
+function debugHebrewQuotationMarks() {
+    console.log('=== DEBUG: Running Hebrew quotation marks fix ===');
     
-    // Find all spans with ng-bind-html containing highlightedText and dir="auto"
+    // First, let's see what we can find
+    console.log('Document ready state:', document.readyState);
+    console.log('Current URL:', window.location.href);
+    
+    // Look for ANY spans with ng-bind-html first
+    const allNgBindSpans = document.querySelectorAll('span[ng-bind-html]');
+    console.log('Found spans with ng-bind-html:', allNgBindSpans.length);
+    
+    allNgBindSpans.forEach((span, index) => {
+        console.log(`Span ${index}:`, {
+            ngBindHtml: span.getAttribute('ng-bind-html'),
+            dir: span.getAttribute('dir'),
+            innerHTML: span.innerHTML,
+            textContent: span.textContent
+        });
+    });
+    
+    // Look for spans with highlightedText specifically
+    const highlightedSpans = document.querySelectorAll('span[ng-bind-html*="highlightedText"]');
+    console.log('Found spans with highlightedText:', highlightedSpans.length);
+    
+    // Look for any spans with dir="auto"
+    const autoSpans = document.querySelectorAll('span[dir="auto"]');
+    console.log('Found spans with dir="auto":', autoSpans.length);
+    
+    // Our target selector
     const targetSpans = document.querySelectorAll('span[ng-bind-html*="highlightedText"][dir="auto"]');
+    console.log('Found target spans (highlightedText + dir="auto"):', targetSpans.length);
     
+    // Check for Hebrew text anywhere
+    const allSpans = document.querySelectorAll('span');
+    let hebrewSpansFound = 0;
+    
+    allSpans.forEach((span, index) => {
+        const text = span.textContent || span.innerText || '';
+        if (/[\u0590-\u05FF]/.test(text) && text.includes('"')) {
+            hebrewSpansFound++;
+            console.log(`Hebrew span with quotes ${hebrewSpansFound}:`, {
+                element: span,
+                text: text,
+                dir: span.getAttribute('dir'),
+                parent: span.parentElement,
+                innerHTML: span.innerHTML
+            });
+        }
+    });
+    
+    console.log('Total Hebrew spans with quotes found:', hebrewSpansFound);
+    
+    // Now try our original logic
     let fixedCount = 0;
     
-    targetSpans.forEach(span => {
-        // Look for the problematic pattern:
-        // span[dir="ltr"] containing quote + Hebrew text + &nbsp;
-        // followed by span[dir="rtl"] containing more Hebrew text with closing quote
+    targetSpans.forEach((span, index) => {
+        console.log(`Processing target span ${index}:`, span);
         
         const ltrSpan = span.querySelector('span[dir="ltr"]');
         const rtlSpan = span.querySelector('span[dir="rtl"]');
+        
+        console.log(`  - LTR span:`, ltrSpan);
+        console.log(`  - RTL span:`, rtlSpan);
         
         if (ltrSpan && rtlSpan) {
             const ltrText = ltrSpan.textContent || ltrSpan.innerText || '';
             const rtlText = rtlSpan.textContent || rtlSpan.innerText || '';
             
-            // Check if this matches our problematic pattern
+            console.log(`  - LTR text: "${ltrText}"`);
+            console.log(`  - RTL text: "${rtlText}"`);
+            
             if (isHebrewQuotePattern(ltrText, rtlText)) {
-                console.log('Found problematic Hebrew quote pattern:', { ltrText, rtlText });
+                console.log('  ✓ Found problematic Hebrew quote pattern!');
                 fixSpanStructure(span, ltrText, rtlText);
                 fixedCount++;
+            } else {
+                console.log('  ✗ Does not match Hebrew quote pattern');
             }
         }
     });
     
-    if (fixedCount > 0) {
-        console.log(`Fixed ${fixedCount} Hebrew quotation mark issues`);
-    }
+    console.log(`=== DEBUG: Fixed ${fixedCount} Hebrew quotation mark issues ===`);
 }
 
 function isHebrewQuotePattern(ltrText, rtlText) {
-    // Check if ltrText starts with quote and contains Hebrew
     const startsWithQuote = ltrText.trim().startsWith('"') || ltrText.trim().startsWith('״');
     const ltrHasHebrew = /[\u0590-\u05FF]/.test(ltrText);
     const rtlHasHebrew = /[\u0590-\u05FF]/.test(rtlText);
     const rtlEndsWithQuote = rtlText.trim().endsWith('"') || rtlText.trim().endsWith('״');
+    
+    console.log('    Pattern check:', {
+        startsWithQuote,
+        ltrHasHebrew,
+        rtlHasHebrew,
+        rtlEndsWithQuote,
+        matches: startsWithQuote && ltrHasHebrew && rtlHasHebrew && rtlEndsWithQuote
+    });
     
     return startsWithQuote && ltrHasHebrew && rtlHasHebrew && rtlEndsWithQuote;
 }
 
 function fixSpanStructure(parentSpan, ltrText, rtlText) {
     try {
-        // Combine the text and clean up
+        console.log('    Fixing span structure...');
         const combinedText = (ltrText + rtlText)
-            .replace(/&nbsp;/g, ' ')  // Replace &nbsp; with regular space
-            .replace(/\s+/g, ' ')     // Normalize multiple spaces
+            .replace(/&nbsp;/g, ' ')
+            .replace(/\s+/g, ' ')
             .trim();
         
-        // Create new RTL span with the combined text
+        console.log('    Combined text:', combinedText);
+        
         const newRtlSpan = document.createElement('span');
         newRtlSpan.setAttribute('dir', 'rtl');
         newRtlSpan.textContent = combinedText;
         
-        // Replace the content of the parent span
+        console.log('    Before fix - parent innerHTML:', parentSpan.innerHTML);
         parentSpan.innerHTML = '';
         parentSpan.appendChild(newRtlSpan);
+        console.log('    After fix - parent innerHTML:', parentSpan.innerHTML);
         
-        console.log('Successfully fixed Hebrew quote structure:', combinedText);
     } catch (error) {
-        console.error('Error fixing Hebrew quote structure:', error);
+        console.error('    Error fixing Hebrew quote structure:', error);
     }
 }
 
-// Initialize the Hebrew quotation marks fix
-function initHebrewQuoteFix() {
-    // Run immediately if DOM is already loaded
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fixHebrewQuotationMarks);
-    } else {
-        fixHebrewQuotationMarks();
-    }
-}
+// Manual trigger function for testing
+window.debugHebrewFix = debugHebrewQuotationMarks;
 
-// Start the Hebrew quote fix
-initHebrewQuoteFix();
+// Run debug version
+console.log('Loading debug Hebrew quote fix...');
+setTimeout(debugHebrewQuotationMarks, 1000);  // Wait 1 second after page load
+setTimeout(debugHebrewQuotationMarks, 3000);  // Try again after 3 seconds
+setTimeout(debugHebrewQuotationMarks, 5000);  // And after 5 seconds
 
-// Create observer for Hebrew quote fix to handle dynamic content
-const hebrewQuoteObserver = new MutationObserver((mutations) => {
-    let shouldFix = false;
-    
-    mutations.forEach((mutation) => {
-        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-            // Check if any added nodes contain our target spans
-            mutation.addedNodes.forEach((node) => {
-                if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (node.querySelector && 
-                        (node.querySelector('span[ng-bind-html*="highlightedText"]') || 
-                         node.matches('span[ng-bind-html*="highlightedText"]'))) {
-                        shouldFix = true;
-                    }
-                }
-            });
-        }
-    });
-    
-    if (shouldFix) {
-        // Delay slightly to allow Angular to finish rendering
-        setTimeout(fixHebrewQuotationMarks, 200);
-    }
+// Also run when content changes
+const debugObserver = new MutationObserver((mutations) => {
+    console.log('DOM mutation detected, running debug fix...');
+    setTimeout(debugHebrewQuotationMarks, 500);
 });
 
-// Start observing for Hebrew quote fixes
-hebrewQuoteObserver.observe(document.body, {
+debugObserver.observe(document.body, {
     childList: true,
     subtree: true
 });
 
-console.log('Hebrew quotation marks fix initialized');
-// Hebrew quotation marks fix end
+console.log('Debug Hebrew quotation marks fix initialized - check console for details');
+console.log('You can also manually run: debugHebrewFix() in the console');
+
+// DEBUG VERSION END- Fix Hebrew quotation marks in titles
 
 // Research Assistant component begin
 
